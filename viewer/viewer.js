@@ -177,10 +177,15 @@ function drawChart(grassData) {
     const maxSubmit = Math.max(0, ...rows.map(r => r[1]));
     const maxAxis = Math.max(4, Math.ceil(maxSubmit / 4) * 4);
     
+    // 연도 개수에 따라 동적으로 차트 높이 계산 (1년당 약 130px + 여백 50px)
+    const uniqueYears = new Set(rows.map(r => r[0].getFullYear()));
+    const numYears = uniqueYears.size || 1;
+    const dynamicHeight = numYears * 130 + 50;
+    
     // Same BOJ color values
     const options = {
         title: "",
-        height: 200,
+        height: dynamicHeight,
         calendar: {
             cellSize: 14,
             cellColor: { stroke: '#ffffff', strokeOpacity: 1, strokeWidth: 1 }
@@ -188,7 +193,8 @@ function drawChart(grassData) {
         colorAxis: {
             minValue: 0,
             maxValue: maxAxis,
-            colors: ['#ebedf0', '#83dd90', '#57c687', '#2baf7d', '#11823b']
+            values: [0, maxAxis],
+            colors: ['#AEF59A', '#11823b']
         }
     };
     
