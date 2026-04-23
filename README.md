@@ -41,14 +41,14 @@ bun start <username>
 
 ```powershell
 # PowerShell 기준
-docker run --rm -v "${PWD}:/app" -w /app/cli node:24-alpine sh -c "npm install && npm start <username>"
+docker run -it --rm -v "${PWD}:/app" -w /app/cli node:24-alpine sh -c "npm install && npm start <username>"
 ```
 
 ### Docker 환경에서 실행하기 (Bun)
 
 ```powershell
 # PowerShell 기준
-docker run --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun install && bun start <username>"
+docker run -it --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun install && bun start <username>"
 ```
 
 ## 뷰어 사용 방법 (데이터 시각화)
@@ -99,5 +99,5 @@ docker run --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun install 
 ## 라이선스 (License)
 
 이 프로젝트는 **Apache License 2.0**에 따라 배포됩니다.
-코드를 자유롭게 사용 및 배포하실 수 있으나, **반드시 저작권(출처) 표기를 포함해야 하며 소스코드를 수정했을 경우 변경 사항을 명시해야 합니다.** 
+코드를 자유롭게 사용 및 배포하실 수 있으나, **반드시 저작권(출처) 표기를 포함해야 하며 소스코드를 수정했을 경우 변경 사항을 명시해야 합니다.**
 자세한 내용은 `LICENSE` 파일을 참고해 주세요.
