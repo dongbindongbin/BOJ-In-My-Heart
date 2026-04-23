@@ -13,12 +13,11 @@ async function fetchHtml(url: string): Promise<string> {
     return response.text();
 }
 
-async function fetchTier(username: string): Promise<number | null> {
+async function fetchSolvedAcApi(username: string): Promise<any> {
     try {
         const response = await fetch(`https://solved.ac/api/v3/user/show?handle=${username}`);
         if (response.ok) {
-            const data = await response.json();
-            return data.tier;
+            return await response.json();
         }
     } catch (e) {
         // ignore errors for solved.ac API
@@ -37,8 +36,8 @@ async function parseUserProfile(username: string) {
         console.log(`[2/5] ${username} 유저의 언어 정보를 가져오는 중...`);
         const langHtml = await fetchHtml(langUrl);
         
-        console.log(`[3/5] ${username} 유저의 solved.ac 티어 정보를 가져오는 중...`);
-        const tier = await fetchTier(username);
+        console.log(`[3/5] ${username} 유저의 solved.ac API 데이터를 가져오는 중...`);
+        const solvedAc = await fetchSolvedAcApi(username);
         
         console.log(`[4/5] 데이터를 분석하는 중...`);
         const $info = cheerio.load(infoHtml);
@@ -122,7 +121,7 @@ async function parseUserProfile(username: string) {
 
         const result = {
             id,
-            tier,
+            solvedAc,
             statusMessage,
             leftTable,
             grassData,
@@ -141,11 +140,44 @@ async function parseUserProfile(username: string) {
     }
 }
 
-const args = process.argv.slice(2);
-if (args.length === 0) {
-    console.error('Usage: bun start <username> OR npm start <username>');
-    process.exit(1);
+const LOCK_FILE = require('path').join(__dirname, '..', 'data', '.run_lock');
+
+async function checkRateLimit() {
+    try {
+        const lastRunStr = await fs.readFile(LOCK_FILE, 'utf-8');
+        const lastRun = parseInt(lastRunStr, 10);
+        if (!isNaN(lastRun)) {
+            const now = Date.now();
+            const diff = now - lastRun;
+            if (diff < 3000) {
+                console.error(`[경고] 사이트 부하 방지를 위해 연속 실행이 제한되었습니다.`);
+                console.error(`=> 약 ${Math.ceil((3000 - diff) / 1000)}초 후에 다시 시도해주세요.`);
+                process.exit(1);
+            }
+        }
+    } catch (e) {
+        // 파일이 없거나 읽을 수 없는 경우 무시 (첫 실행 등)
+    }
+    
+    // 현재 시간으로 락 파일 업데이트
+    try {
+        await fs.writeFile(LOCK_FILE, Date.now().toString(), 'utf-8');
+    } catch (e) {
+        // 락 파일 작성 실패 무시
+    }
 }
 
-const targetUser = args[0];
-parseUserProfile(targetUser);
+async function main() {
+    const args = process.argv.slice(2);
+    if (args.length === 0) {
+        console.error('Usage: bun start <username> OR npm start <username>');
+        process.exit(1);
+    }
+
+    await checkRateLimit();
+
+    const targetUser = args[0];
+    await parseUserProfile(targetUser);
+}
+
+main();

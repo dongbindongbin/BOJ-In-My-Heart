@@ -2,6 +2,13 @@
 
 백준 온라인 저지(BOJ) 사이트의 사용자 정보를 추출하여 json으로 저장하고 로컬에서 시각화해주는 CLI 도구 및 뷰어입니다.
 
+## ⚠️ 주의사항
+
+> [!WARNING]
+> 이 도구는 백준(BOJ) 및 Solved.ac 라이브 서버에 직접 요청을 보내어 데이터를 수집합니다.
+> **서버 부하 및 무분별한 봇(Bot) 동작을 방지하기 위해 CLI 실행 간 3초의 제한 시간(Rate Limit)이 걸려 있습니다.**
+> 가급적 본인 아이디로만 실행해 주시기를 권장합니다.
+
 ## 실행 방법
 
 이 프로젝트는 **Node.js** 와 **Bun** 환경을 지원합니다.
@@ -15,7 +22,7 @@ npm install
 
 # 2. 특정 사용자의 데이터 추출 (결과는 data 폴더에 저장됨)
 npm start <username>
-# 예시: npm start happyp
+# 예시: npm start tourist_01
 ```
 
 ### Bun 환경에서 실행하기
@@ -27,7 +34,7 @@ bun install
 
 # 2. 특정 사용자의 데이터 추출 (결과는 data 폴더에 저장됨)
 bun start <username>
-# 예시: bun start happyp
+# 예시: bun start tourist_01
 ```
 
 ### Docker 환경에서 실행하기 (Node.js 24 Alpine)
@@ -56,14 +63,19 @@ docker run --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun install 
 
 ```json
 {
-  "id": "fascinating",
+  "id": "tourist_01",
+  "solvedAc": {
+    "tier": 20,
+    "rating": 2753,
+    "class": 1
+  },
   "statusMessage": "BOJ-In-My-Heart",
   "leftTable": {
     "등수": "1",
-    "맞은 문제": "999",
+    "맞은 문제": "10000",
     "시도했지만 맞지 못한 문제": "1",
-    "제출": "1000",
-    "문제집": "1"
+    "제출": "10000",
+    "문제집": "100"
   },
   "grassData": [
     {
@@ -80,6 +92,12 @@ docker run --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun install 
       "틀렸습니다": "0"
     }
   ],
-  "timestamp": "2026-04-22T15:35:50.000Z"
+  "timestamp": "2026-04-23T02:15:00.000Z"
 }
 ```
+
+## 라이선스 (License)
+
+이 프로젝트는 **Apache License 2.0**에 따라 배포됩니다.
+코드를 자유롭게 사용 및 배포하실 수 있으나, **반드시 저작권(출처) 표기를 포함해야 하며 소스코드를 수정했을 경우 변경 사항을 명시해야 합니다.** 
+자세한 내용은 `LICENSE` 파일을 참고해 주세요.

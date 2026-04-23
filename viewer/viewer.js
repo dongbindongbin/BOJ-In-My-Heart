@@ -60,8 +60,8 @@ function renderData(data) {
     
     // Tier Image
     const tierImg = document.getElementById('v-tier');
-    if (data.tier !== undefined && data.tier !== null) {
-        tierImg.src = `https://static.solved.ac/tier_small/${data.tier}.svg`;
+    if (data.solvedAc && data.solvedAc.tier !== undefined && data.solvedAc.tier !== null) {
+        tierImg.src = `https://static.solved.ac/tier_small/${data.solvedAc.tier}.svg`;
         tierImg.style.display = 'inline-block';
     } else {
         tierImg.style.display = 'none';
@@ -166,6 +166,10 @@ function drawChart(grassData) {
     });
     
     dataTable.addRows(rows);
+    
+    // 강제로 정수 표기를 위한 포맷터 적용 (소수점 방지)
+    const formatter = new google.visualization.NumberFormat({ pattern: '#,###' });
+    formatter.format(dataTable, 1);
     
     const chart = new google.visualization.Calendar(document.getElementById('heatmap'));
     
