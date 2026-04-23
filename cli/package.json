@@ -1,0 +1,17 @@
+{
+  "name": "boj-parser",
+  "version": "1.0.0",
+  "description": "Baekjoon User Profile Parser & Viewer",
+  "main": "cli.ts",
+  "scripts": {
+    "start": "ts-node cli.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}

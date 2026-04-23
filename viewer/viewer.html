@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>BOJ Viewer</title>
+    <!-- Bootstrap 3 CDN for exact BOJ styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="viewer.css">
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <!-- Drag and Drop Overlay -->
+    <div id="drop-zone">
+        <div class="drop-message">
+            <h2 style="color: #0076c0;">화면을 클릭하여 JSON 파일을 선택하세요</h2>
+            <input type="file" id="file-input" accept=".json" style="display: none;">
+        </div>
+    </div>
+
+    <div class="wrapper" id="main-content" style="display: none;">
+        <div class="container content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>
+                            <img id="v-tier" class="solvedac-tier" src="" style="width: 0.8em; vertical-align: baseline; display: none;">&nbsp;
+                            <span id="v-id" class="no-ul">username</span>
+                        </h1>
+                        <blockquote class="no-mathjax">
+                            <span id="v-status">상태 메시지</span>
+                            <div class="tab-v2 user-menu pull-right" style="margin-top: -10px;">
+                                <ul class="nav nav-tabs" style="border-bottom: none;">
+                                    <li class="active"><a href="#info-tab" data-toggle="tab">정보</a></li>
+                                    <li><a href="#lang-tab" data-toggle="tab">언어</a></li>
+                                </ul>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <table id="statics" class="table table-hover">
+                                <tbody id="v-left-table">
+                                    <!-- Left table injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="col-md-9">
+                            
+                            <div class="tab-content">
+                                <!-- Info Tab -->
+                                <div class="tab-pane fade in active" id="info-tab">
+                                    <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">2025-2026년</h3></div>
+                                <div class="panel-body">
+                                    <div id="heatmap" style="overflow: hidden;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">맞은 문제</h3></div>
+                                <div class="panel-body">
+                                    <div class="problem-list" id="v-problems">
+                                        <!-- Solved problems injected here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="panel-title">시도했지만 맞지 못한 문제</h3></div>
+                                <div class="panel-body">
+                                    <div class="problem-list" id="v-failed-problems">
+                                        <!-- Failed problems injected here -->
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                                
+                                <!-- Lang Tab -->
+                                <div class="tab-pane fade" id="lang-tab">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><h3 class="panel-title">언어</h3></div>
+                                        <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr id="v-lang-head"></tr>
+                                            </thead>
+                                            <tbody id="v-lang-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="viewer.js"></script>
+</body>
+</html>
