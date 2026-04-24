@@ -57,7 +57,9 @@ docker run -it --rm -v "${PWD}:/app" -w /app/cli oven/bun:latest sh -c "bun inst
 
 1. `viewer` 폴더 안의 `viewer.html` 파일을 더블클릭하여 브라우저로 엽니다.
 2. 브라우저 화면에서 CLI를 통해 `data` 폴더에 생성된 json 파일을 마우스로 끌어다 놓거나 클릭하여 불러옵니다.
-3. 백준 사이트와 완벽하게 100% 일치하는 UI로 해당 사용자의 잔디, 맞은 문제, 랭킹 및 언어별 통계 정보가 렌더링됩니다!
+3. 백준 사이트와 99% 유사한 UI로 해당 사용자의 잔디, 맞은 문제, 랭킹 및 언어별 통계 정보를 볼 수 있습니다.
+
+![example_image](data/example.png)
 
 ## 데이터 구조 (JSON)
 
