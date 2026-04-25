@@ -1,0 +1,131 @@
+:root {
+  --primary-color: #0076c0;
+  --secondary-color: #005a92;
+  --bg-color: #121212;
+  --panel-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --accent-color: #4caf50;
+  --error-color: #f44336;
+}
+
+body {
+  width: 320px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 5px 0 0 0;
+}
+
+.status-card {
+  width: 100%;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.status-label {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+#status-text {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.btn-extract {
+  width: 100%;
+  background: linear-gradient(135deg, #0076c0 0%, #005a92 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-extract:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 118, 192, 0.4);
+}
+
+.btn-extract:active {
+  transform: translateY(0);
+}
+
+.btn-extract:disabled {
+  background: #444;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-message {
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  display: none;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  display: none;
+}
+
+.footer {
+  font-size: 0.7rem;
+  color: #555;
+  margin-top: 5px;
+}

@@ -90,28 +90,49 @@ function renderData(data) {
         leftTableBody.appendChild(tr);
     }
     
-    // 3. Solved Problems
-    const problemsContainer = document.getElementById('v-problems');
-    problemsContainer.innerHTML = '';
-    (data.solvedProblems || []).forEach(prob => {
-        const a = document.createElement('a');
-        a.href = `https://www.acmicpc.net/problem/${prob}`;
-        a.className = 'result-ac';
-        a.innerText = prob;
-        a.target = '_blank';
-        problemsContainer.appendChild(a);
-    });
+    // 3. Problem Lists (Dynamic)
+    const listsContainer = document.getElementById('v-problem-lists-container');
+    listsContainer.innerHTML = '';
+    
+    const lists = data.problemLists || [];
+    
+    // Render each category in the order they exist in problemLists
+    lists.forEach(({ title, problems }) => {
+        if (!problems || problems.length === 0) return;
 
-    // 3.5. Failed Problems
-    const failedProblemsContainer = document.getElementById('v-failed-problems');
-    failedProblemsContainer.innerHTML = '';
-    (data.failedProblems || []).forEach(prob => {
-        const a = document.createElement('a');
-        a.href = `https://www.acmicpc.net/problem/${prob}`;
-        a.className = 'result-wa'; // using WA color for failed
-        a.innerText = prob;
-        a.target = '_blank';
-        failedProblemsContainer.appendChild(a);
+        const panel = document.createElement('div');
+        panel.className = 'panel panel-default';
+        
+        const heading = document.createElement('div');
+        heading.className = 'panel-heading';
+        const h3 = document.createElement('h3');
+        h3.className = 'panel-title';
+        h3.innerText = title;
+        heading.appendChild(h3);
+        
+        const body = document.createElement('div');
+        body.className = 'panel-body';
+        const listDiv = document.createElement('div');
+        listDiv.className = 'problem-list';
+        
+        // Determine color class based on title
+        let colorClass = 'result-wa'; // default
+        if (title.includes('맞은') || title.includes('성공')) colorClass = 'result-ac';
+        if (title.includes('맞았지만') || title.includes('부분')) colorClass = 'result-partial';
+
+        problems.forEach(prob => {
+            const a = document.createElement('a');
+            a.href = `https://www.acmicpc.net/problem/${prob}`;
+            a.className = colorClass;
+            a.innerText = prob;
+            a.target = '_blank';
+            listDiv.appendChild(a);
+        });
+        
+        body.appendChild(listDiv);
+        panel.appendChild(heading);
+        panel.appendChild(body);
+        listsContainer.appendChild(panel);
     });
     
     // 4. Language Data

@@ -62,21 +62,10 @@
                                 </div>
                             </div>
                             
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><h3 class="panel-title">맞은 문제</h3></div>
-                                <div class="panel-body">
-                                    <div class="problem-list" id="v-problems">
-                                        <!-- Solved problems injected here -->
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><h3 class="panel-title">시도했지만 맞지 못한 문제</h3></div>
-                                <div class="panel-body">
-                                    <div class="problem-list" id="v-failed-problems">
-                                        <!-- Failed problems injected here -->
-                                    </div>
+                            <div id="v-problem-lists-container">
+                                <!-- Dynamic problem list panels will be injected here -->
+                                <div class="panel panel-default" id="v-problems-loading">
+                                    <div class="panel-body">데이터를 불러오는 중...</div>
                                 </div>
                             </div>
                                 </div>

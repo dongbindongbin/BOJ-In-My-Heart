@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>BOJ In My Heart</h1>
+    </div>
+
+    <div class="status-card">
+      <div class="status-label">상태: <span id="status-text">확인 중...</span></div>
+      <button id="extract-btn" class="btn-extract">
+        <span class="loader" id="loader"></span>
+        <span id="btn-label">데이터 추출 시작</span>
+      </button>
+      <div id="success-msg" class="success-message">추출 완료! 곧 다운로드됩니다.</div>
+      <div id="error-msg" class="error-message">프로필 페이지에서 실행해주세요.</div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
